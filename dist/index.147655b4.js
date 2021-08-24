@@ -467,6 +467,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _app1Css = require("./app1.css");
 var _jquery = require("jquery");
 var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+const html = `\n    <section id="app1">\n        <div class="output"><span id="number">100</span></div>\n        <div class="actions">\n            <button id="add1">+1</button>\n            <button id="minus1"> -1</button>\n            <button id="mul2">*2</button>\n            <button id="divide2">÷2</button>\n        </div>\n    </section>`;
+const $element = _jqueryDefault.default(html).prependTo(_jqueryDefault.default('body>.page'));
 const $button1 = _jqueryDefault.default('#add1');
 const $button2 = _jqueryDefault.default('#minus1');
 const $button3 = _jqueryDefault.default('#mul2');
@@ -7348,24 +7350,41 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _app2Css = require("./app2.css");
 var _jquery = require("jquery");
 var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+const html = `\n     <section id="app2">\n            <ol class="tab-bar">\n                <li>1</li>\n                <li>2</li>\n            </ol>\n            <ol class="tab-content">\n                <li>内容1</li>\n                <li>内容2</li>\n            </ol>\n    </section>`;
+const $html = _jqueryDefault.default(html).appendTo(_jqueryDefault.default('body>.page'));
 const $tabBar = _jqueryDefault.default('#app2 .tab-bar');
 const $tabContent = _jqueryDefault.default('#app2 .tab-content');
+const localKey = 'app2.index';
+const index = localStorage.getItem(localKey) || 0;
 $tabBar.on('click', 'li', (e)=>{
     const $li = _jqueryDefault.default(e.currentTarget);
     $li.addClass('selected').siblings().removeClass('selected');
-    const index = $li.index();
-    $tabContent.children().eq(index).addClass('active').siblings().removeClass('active');
+    const index1 = $li.index();
+    localStorage.setItem('app2.index', index1);
+    $tabContent.children().eq(index1).addClass('active').siblings().removeClass('active');
 });
-$tabBar.children().eq(0).trigger('click');
+$tabBar.children().eq(index).trigger('click');
 
 },{"./app2.css":"8qkpE","jquery":"igaHu","@parcel/transformer-js/src/esmodule-helpers.js":"cfMew"}],"8qkpE":[function() {},{}],"55jpK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _app3Css = require("./app3.css");
 var _jquery = require("jquery");
 var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+const html = `\n<section id="app3">\n          <div class="square"></div>\n</section>`;
+const $html = _jqueryDefault.default(html).appendTo(_jqueryDefault.default('body>.page'));
 const $square = _jqueryDefault.default('#app3 .square');
+const localKey = 'app3.active';
+const active = localStorage.getItem(localKey) === 'yes';
+$square.toggleClass('active', active);
 $square.on('click', ()=>{
-    $square.toggleClass('active');
+    if ($square.hasClass('active')) {
+        localStorage.setItem('app3.active', 'no') //记录最后的状态
+        ;
+        $square.removeClass('active');
+    } else {
+        localStorage.setItem('app3.active', 'yes');
+        $square.addClass('active');
+    }
 });
 
 },{"./app3.css":"5NMR4","jquery":"igaHu","@parcel/transformer-js/src/esmodule-helpers.js":"cfMew"}],"5NMR4":[function() {},{}],"fsfSg":[function(require,module,exports) {
@@ -7373,6 +7392,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _app4Css = require("./app4.css");
 var _jquery = require("jquery");
 var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+const html = `\n<section id="app4">\n     <div class="circle"></div>\n</section>`;
+const $html = _jqueryDefault.default(html).appendTo(_jqueryDefault.default('body>.page'));
 const $circle = _jqueryDefault.default('#app4 .circle');
 console.log($circle);
 $circle.on('mouseenter', ()=>{
